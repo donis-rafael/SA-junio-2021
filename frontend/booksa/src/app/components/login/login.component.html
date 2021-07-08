@@ -1,0 +1,28 @@
+<div>
+    <app-barra-navegacion></app-barra-navegacion>
+    <br />
+
+    <main class="page login-page">
+        <section class="clean-block clean-form dark">
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">Log In</h2>
+
+                </div>
+                <form>
+                    <div class="form-group"><label for="email">Email</label><input class="form-control item"
+                            type="email" id="email" name="inputEmail" [(ngModel)]="datos.email" ></div>
+                    <div class="form-group"><label for="password">Password</label><input class="form-control"
+                            type="password" id="password" name="inputPassword" [(ngModel)]="datos.password" ></div>
+                    <div class="form-group">
+                        <div class="form-check"><input class="form-check-input" type="checkbox" id="checkbox"><label
+                                class="form-check-label" for="checkbox">Remember me</label></div>
+                    </div><button class="btn btn-primary btn-block" type="submit" (click)="verificar()">Log In</button>
+                    <br>
+                    <a href="/register">No tienes una cuenta?... Crea una</a>
+                </form>
+            </div>
+        </section>
+    </main>
+    <app-footer></app-footer>
+</div>

@@ -1,0 +1,9 @@
+version: '3.3'
+services:
+  webapp:
+    container_name: webapp
+    build: ./
+    expose:
+      - "80"
+    ports:
+      - "80:80"

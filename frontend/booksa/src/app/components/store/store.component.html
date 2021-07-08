@@ -1,0 +1,110 @@
+<div>
+  <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+  <main class="page catalog-page pt-4">
+    <section class="clean-block clean-catalog dark">
+      <div class="container">
+        <div class="block-heading">
+          <h2 class="text-info">Tienda</h2>
+          <p>Bienvenido(a), disfrute de nuestros libros. ¡Animate en comprar un libro de tu agrado!</p>
+        </div>
+        <div class="text-center alert alert-{{notificacion.tipo}} alert-dismissible fade show" role="alert" *ngIf="notificacion.activar">
+          <strong>{{notificacion.mensaje}}</strong>
+          <button type="button" class="close" data-dismiss="alert" data-dismiss="modal" aria-label="Close" (click)="desactivarNotificacion()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="content">
+          <div class="row ml-2">
+            <!-- <div class="col-md-3">
+              <div class="my-2 d-md-block">
+                <div class="filters">
+                  <div class="filter-item">
+                    <h3>Buscar por editorial</h3>
+                    <div class="input-group mb-3 pr-3">
+                      <input class="form-control" type="search" placeholder="Buscar" [(ngModel)]="bookeditorial" />
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-success" (click)="buscarEditorial()">
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <h3>Generos literarios</h3>
+                    <div class="form-check" *ngFor="let gender of genres; let i = index">
+                      <input class="form-check-input" type="radio" name="radios" id="formCheck-{{i}}" (change)="changeCheck(i, $event.target)">
+                      <label class="form-check-label" for="formCheck-{{i}}">{{gender}}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="col">
+              <div class="products">
+                <div class="row pt-2 row-cols-1 row-cols-md-2">
+                  <div class="col pb-3" *ngFor="let book of books; let i = index">
+                    <div class="card" data-toggle="modal" data-target="#exampleModal" (click)="changeCurrentBook(i)">
+                      <div class="card-header text-center"><strong>{{book.name}}</strong></div>
+                      <div class="card-body">
+                        <div class="d-flex justify-content-center">
+                          <div class="media">
+                            <img class="mr-3" style="max-height: 150px;" src="{{book.image}}" alt="...">
+                            <div class="media-body pt-2">
+                              <div><span class="badge badge-info">Autor</span></div>
+                              <div class="pb-2"><span class="font-smaller">{{book.author}}</span></div>
+                              <div><span class="badge badge-info">Genero</span></div>
+                              <div class="pb-1" *ngFor="let gen of book.genres"><span class="font-smaller">{{gen}}</span></div>
+                              <div><span class="badge badge-info">Precio</span></div>
+                              <div><span><h5>Q{{book.price}}</h5></span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!--Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <h2><strong>{{currentBook.name}}</strong></h2>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" #bookClose>
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-center">
+            <div class="media">
+              <img class="mr-4" style="max-height: 150px;" src="{{currentBook.image}}" alt="...">
+              <div class="media-body pt-2">
+                <div><span class="badge badge-info">Autor</span></div>
+                <div><p class="font-smaller">{{currentBook.author}}</p></div>
+                <div><span class="badge badge-info">Stock</span></div>
+                <div class="pb-2"><span class="font-smaller">{{currentBook.stock}}</span></div>
+                <div><span class="badge badge-info">Genero</span></div>
+                <!-- <div class="pb-2"><span class="font-smaller">{{currentBook.genres}}</span></div> -->
+                <div class="pb-1" *ngFor="let gen of currentBook.genres"><span class="font-smaller">{{gen}}</span></div>
+
+                <div><span class="badge badge-info">Precio</span></div>
+                <div class="pt-2"><span><h3>Q{{currentBook.price}}</h3></span></div>
+              </div>
+            </div>
+          </div>
+      </div>
+        <div class="modal-footer">
+          <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+          <button class="btn btn-primary" type="button" (click)="addCart()"><i class="icon-basket"></i>Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

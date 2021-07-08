@@ -1,0 +1,56 @@
+<div>
+    <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+    <br>
+    <br>
+    <br>
+    <main class="page catalog-page pt-4">
+        <section class="clean-block clean-catalog dark">
+                <div class="container">
+                    <div class="row justify-content-md-center">
+
+                      <div class="col-12 col-md-8">
+                        <div class="card">
+                            <div class="card-header text-center"><strong>Calculo de Impuesto sobre el libro por pais</strong></div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="media">
+                                        <img class="w-50 p-3" src="../../../../assets/img/avatars/Income-Tax.jpg" alt="...">
+                                        <div class="media-body pt-2">
+                                            <div><span class="badge badge-info">Precio</span></div>
+                                            <div class="input-group mb-2">
+                                                <span class="input-group-text">Q.</span>
+                                                <input type="number" id="price"
+                                                    class="form-control quantity-input"
+                                                    [(ngModel)]="taxBook.price" min="1">
+                                            </div>
+                                            <div><span class="badge badge-info">Pais</span></div>
+                                            <select class="custom-select"name="taxes-pais" [(ngModel)]="taxBook.pais" (change)="calcImpuesto()" >
+                                                <option selected>----</option>
+                                                <option *ngFor="let pais of paises">
+                                                    {{pais}}
+                                                </option>
+                                            </select>
+                                            <div><span class="badge badge-info">Porcentaje de Impuesto</span></div>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">%</span>
+                                                </div>
+                                                <input type="text" class="form-control" [(ngModel)]="taxBook.tax" name="createBook-price">
+                                            </div>
+                                            <div><span class="badge badge-info">Impuesto
+                                                    Calculado</span></div>
+                                            <div><span>
+                                                    <h3>Q{{taxBook.calc}}</h3>
+                                                </span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </section>
+    </main>
+    <app-footer></app-footer>
+</div>

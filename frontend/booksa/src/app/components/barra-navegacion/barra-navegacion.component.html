@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark clean-navbar">
+  <div class="container">
+    <!-- <a class="navbar-brand logo" [routerLink]="['/']"></a> -->
+    <div class="navbar-brand btn-group">
+      <button type="button" class="btn btn-success">Grupo {{noGroup}}</button>
+      <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" (click)="changeESB(1)">1</a>
+        <a class="dropdown-item" (click)="changeESB(2)">2</a>
+        <a class="dropdown-item" (click)="changeESB(3)">3</a>
+        <a class="dropdown-item" (click)="changeESB(4)">4</a>
+      </div>
+    </div>
+    <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
+      <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="collapse navbar-collapse" id="navcol-1" [ngSwitch]="Get_Tipo_Usuario()">
+          <!-- CLIENTE NO LOGEADO  -->
+          <ul class="navbar-nav ml-auto" *ngSwitchCase="1">
+            <!-- Example split danger button -->
+              <li class="nav-item"><a class="nav-link active" [routerLink]="['/']">Principal</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/store']">Tienda</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Login</a></li>
+              <li class="nav-item"><a class="nav-link" [routerLink]="['/register']">Register</a></li>
+          </ul>
+
+          <!-- CUENTA EDITORIAL -->
+          <ul class="navbar-nav ml-auto" *ngSwitchCase="3">
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/create-book']">Crear Libro</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/edit-book']">Lista de Libros</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/taxes-book']">Calculo Impuesto</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/requests-book']">Solcitudes Book</a></li>
+            <li class="nav-item"><label class="pt-1" id="labelusr" style="color:rgb(44, 255, 2)" > {{getUserName()}} </label></li>
+            <li class="nav-item"><a class="nav-link" (click)="Log_Out()">Salir</a></li>
+          </ul>
+
+          <!-- CLIENTE ADMIN  -->
+          <ul class="navbar-nav ml-auto" *ngSwitchCase="2">
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/admin']">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/orden-admin']">Estados de ordenes</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/bitacora']">Bitacora</a></li>
+            <li class="nav-item"><label class="pt-1" id="labelusr" style="color:rgb(44, 255, 2)" > {{getUserName()}} </label></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/']" (click)="Log_Out()">Salir</a></li>
+          </ul>
+
+          <!-- CLIENTE LOGUEADO  -->
+          <ul class="navbar-nav ml-auto" *ngSwitchCase="4">
+            <li class="nav-item"><a class="nav-link active" [routerLink]="['/']">Principal</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/store']">Tienda</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/shopping-cart']">Carrito de compras</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/check-orders']">Chequear compras</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/request-book']">Solicitar Libro</a></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/view-books-cli']">biblioteca</a></li>
+            <li class="nav-item"><label class="pt-1" id="labelusr" style="color:rgb(44, 255, 2)" > {{getUserName()}} </label></li>
+            <li class="nav-item"><a class="nav-link" [routerLink]="['/']" (click)="Log_Out()">Salir</a></li>
+          </ul>
+      </div>
+  </div>
+</nav>

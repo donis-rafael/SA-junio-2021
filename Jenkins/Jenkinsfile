@@ -1,0 +1,19 @@
+pipeline {
+  agent any
+  options {    
+    timeout(time: 3,  unit: 'MINUTES')
+  }
+
+  stages {
+    stage('Stage 1') {
+      steps {     
+        echo 'Hola Mundo x  lMMl'
+      }
+    }
+    stage('ansible') {
+      steps {     
+        ansiblePlaybook credentialsId: 'gcloud3', disableHostKeyChecking: true, installation: 'ansible1', inventory: 'ansible/dev.inv', playbook: 'ansible/ansible.yml'
+      }
+    }
+  }
+}

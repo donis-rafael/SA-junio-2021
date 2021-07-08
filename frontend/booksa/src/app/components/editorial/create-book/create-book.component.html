@@ -1,0 +1,197 @@
+<div>
+    <app-barra-navegacion></app-barra-navegacion>
+    <br />
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Home - Brand</title>
+    </head>
+
+    <body>
+        <app-barra-navegacion></app-barra-navegacion>
+        <br />
+        <br />
+        <main class="page landing-page">
+            <section id="hero">
+                <div class="black-overlay">
+                    <div class="container profile profile-view" id="profile">
+                        <div class="row">
+                            <div class="col-md-12 alert-col relative">
+                                <div class="alert alert-info alert-dismissible absolue center" role="alert"><button
+                                        type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button><span>El libro fue creado</span></div>
+                            </div>
+                        </div>
+                        <form>
+                            <div class="form-row profile-row">
+                                <div class="col-md-4 relative">
+                                    <div class="custom-file fileInputProfileWrap">
+
+                                        <div class="img-space">
+
+                                            <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                                <img [src]="newBook.image" />
+                                            </ng-container>
+                                            <ng-template #elseTemplate>
+
+                                                <img src="https://www.gravatar.com/avatar/1234566?size=200&d=mm"
+                                                    class="img-responsive">
+                                            </ng-template>
+                                            <input type="file" (change)="fileChangeEvent($event)"
+                                                class="fileInputProfile">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h1 style="color: rgb(255,255,255);">Nuevo Libro</h1>
+                                    <hr>
+                                    <div class="form-row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Nombre Libro</label>
+                                                <input class="form-control" type="text" name="createBook-name"
+                                                    [(ngModel)]="newBook.name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Nombre Autor</label>
+                                                <input class="form-control" type="text" name="createBook-name"
+                                                    [(ngModel)]="newBook.author">
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group">
+                                                <label style="color: rgb(255,255,255);">Generos:</label>
+                                                <!-- ETIQUETAS -->
+                                                <tag-input [(ngModel)]='newBook.categories' name="tagGeneros" [hideForm]="true" ></tag-input>
+                                                <!-- ------ -->
+                                                <select class="custom-select" #selectGenero (change)="onChange(selectGenero.value)"
+                                                    name="createBook-genre">
+                                                    <option selected>----</option>
+                                                    <option *ngFor="let genero of getGeneros()" [value]="genero">
+                                                        {{genero}}
+                                                    </option>
+                                                </select>
+                                                <a style="color: rgb(241, 238, 19);" data-toggle="modal"  data-target="#exampleModalCenter" (click)="resetFlags()" >No existe el Genero?... Crea uno (click)</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Fecha Publicacion</label>
+                                                <input class="form-control" type="text" name="createBook-published"
+                                                    [(ngModel)]="newBook.published">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Stock</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">00</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" [(ngModel)]="newBook.stock"
+                                                        name="createBook-stock">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Precio</label>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Q</span>
+                                                        <span class="input-group-text">0.00</span>
+                                                    </div>
+                                                    <input type="text" class="form-control"
+                                                        aria-label="Quezal amount (with dot and two decimal places)"
+                                                        [(ngModel)]="newBook.price" name="createBook-price">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Editorial</label>
+                                                <input class="form-control" type="text" name="createBook-editorial">
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group"><label
+                                                    style="color: rgb(255,255,255);">Descripcion</label>
+                                                <textarea class="form-control" aria-label="With textarea"
+                                                    [(ngModel)]="newBook.description"
+                                                    name="createBook-description"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-row">
+                                        <div class="col-md-12 content-right">
+                                            <button class="btn btn-primary form-btn" type="submit"
+                                                (click)="createBook()" name="btn-crear">CREAR</button>
+                                            <button class="btn btn-danger form-btn" type="reset"
+                                                name="createBook-btnCancelar">CANCELAR</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="hero-bg"></div>
+                <div id="slogan"></div><a class="d-flex flex-row justify-content-center align-items-center"
+                    id="continue" style="width:34px;" href="#index-features"></a>
+            </section>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div *ngIf="messageOk" class="col">
+                                        <div class="alert alert-success" role="alert">
+                                           {{notifCategory}}
+                                        </div>
+                                    </div>
+                                    <div *ngIf="messageFail" class="col">
+                                        <div class="alert alert-danger" role="alert">
+                                            {{notifCategory}}
+                                        </div>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Crea tu Genero</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <label style="color: rgb(15, 15, 15);">Nombre Genero</label>
+                            <input class="form-control" type="text" name="createBook-newCategories" [(ngModel)]="newCategory" >
+                            <br>
+                            <button type="button" class="btn btn-success" (click)="createCategory()">Crear</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- <app-footer></app-footer> -->
+    </body>
+</div>

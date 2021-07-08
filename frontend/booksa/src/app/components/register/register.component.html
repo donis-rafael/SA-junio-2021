@@ -1,0 +1,95 @@
+<div>
+  <!-- barra de navegacion -->
+  <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+  <!-- register -->
+  <main class="page registration-page pt-4">
+
+    <section class="clean-block clean-form dark">
+      <div class="container">
+        <div class="block-heading">
+          <h2 class="text-info">Registrar</h2>
+          <p></p>
+        </div>
+        <form>
+          <div class="alert alert-{{notify.tipo}} alert-dismissible fade show" role="alert" *ngIf="notify.activar">
+            <strong>{{notify.mensaje}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="quitNotify()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- inicializar tabs -->
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="cliente-tab" data-toggle="tab" href="#cliente" role="tab" aria-controls="cliente" aria-selected="false">Usuario</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="editorial-tab" data-toggle="tab" href="#editorial" role="tab" aria-controls="editorial" aria-selected="true">Editorial</a>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+
+            <!-- pestaña de clientee -->
+            <div class="tab-pane fade show active" id="cliente" role="tabpanel" aria-labelledby="cliente-tab">
+              <div class="mb-3 py-2">
+                <label class="form-label" for="name-cli">Nombre</label>
+                <input class="form-control item" type="text" id="name-cli" name="name-cli" placeholder="Nombre" [(ngModel)]="cliente.name">
+              </div>
+              <div class="mb-3 py-2">
+                <label class="form-label" for="lastname-cli">Apellido</label>
+                <input class="form-control item" type="text" id="lastname-cli" name="lastname-cli" placeholder="Apellido" [(ngModel)]="cliente.lastname">
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="email-cli">Correo electronico</label>
+                <input class="form-control item" type="email" id="email-cli" name="email-cli" placeholder="Correo electronico" [(ngModel)]="cliente.email">
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="password-cli1">Contraseña</label>
+                <input class="form-control item" type="password" id="password-cli1" name="password-cli1" placeholder="Contraseña" [(ngModel)]="cliente.password">
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="password-cli2">Confirmar Contraseña</label>
+                <input class="form-control item" type="password" id="password-cli2" name="password-cli2" placeholder="Confirmar" [(ngModel)]="passValidarCliente">
+              </div>
+              <div class="mb-3 py-2">
+                <label class="form-label" for="phone-cli">Telefono</label>
+                <input class="form-control item" type="number" id="phone-cli" min="0" name="phone-cli" placeholder="Telefono" [(ngModel)]="cliente.phone">
+              </div>
+
+              <button class="btn btn-primary" type="submit" (click)="signUpcliente()">Registrar</button>
+            </div>
+
+            <!-- pestaña de editorial -->
+            <div class="tab-pane fade" id="editorial" role="tabpanel" aria-labelledby="editorial-tab">
+              <div class="mb-3 py-2">
+                <label class="form-label" for="name-edi">Nombre</label>
+                <input class="form-control item" type="text" id="name-edi" name="name-edi" placeholder="Nombre" [(ngModel)]="editorial.name">
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="email-edi">Correo electronico</label>
+                <input class="form-control item" type="email" id="email-edi1" name="email-edi" placeholder="Correo electronico" [(ngModel)]="editorial.email">
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="password-edi1">Contraseña</label>
+                <input class="form-control item" type="password" id="password-edi1" name="password-edi1" placeholder="Contraseña" [(ngModel)]="editorial.password">
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="password-edi2">Confirmar Contraseña</label>
+                <input class="form-control item" type="password" id="password-edi2" name="password-edi2" placeholder="Confirmar" [(ngModel)]="passValidarEditorial">
+              </div>
+              <div class="mb-3 py-2">
+                <label class="form-label" for="location-edi">Ubicacion</label>
+                <input class="form-control item" type="text" id="location-edi" name="location-edi" placeholder="Ubicacion" [(ngModel)]="editorial.location">
+              </div>
+
+              <button class="btn btn-primary" type="submit" (click)="signUpEditorial()">Registrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- footer -->
+  <app-footer></app-footer>
+</div>

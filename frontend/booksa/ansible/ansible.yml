@@ -1,0 +1,45 @@
+- hosts: webservers
+  become: true
+
+  # Instalacion de docker
+  tasks:
+    - name: "Install required system packages"
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+    
+    - name: "Add Docker GPG key"
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: "Add Docker Repository"
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+    
+    - name: "Update apt and install docker-ce"
+      apt: update_cache=yes name=docker-ce state=latest
+      notify:
+        - "Add user to group docker"
+      
+  handlers:
+    - name: "Add user to group docker"
+      shell: usermod -aG docker
+
+  # Instalacion de docker-compose
+  tasks:
+    - name: "Instalar docker-compose"
+      apt: name=docker-compose state=latest update_cache=yes
+
+  # Instalacion de node js
+  tasks:
+    - name: "Add Node Repo"
+      shell: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+
+    - name: "Instalar Node js y npm"
+      apt: name=nodejs state=latest update_cache=yes
+
+  # Instalacion de Angular
+  tasks:
+    - name: "Instalar Angular"
+      shell: "npm install -g @angular/cli@12.0.1"

@@ -1,0 +1,148 @@
+<div>
+  <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+  <main class="page blog-post-list pt-4">
+    <section class="clean-block clean-blog-list dark">
+      <div class="container">
+        <div class="block-heading">
+          <h2 class="text-info">Admin</h2>
+          <p>¡Bienvenido a la página de administración donde administrará sus solicitudes y usuarios!</p>
+        </div>
+        <div class="text-center alert alert-{{notify.tipo}} alert-dismissible fade show" role="alert" *ngIf="notify.activar">
+          <strong>{{notify.mensaje}}</strong>
+          <button type="button" class="close" data-dismiss="alert" data-dismiss="modal" aria-label="Close" (click)="quitNotify()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="block-content">
+          <div class="clean-blog-post">
+            <!-- inicializar tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="users-tab" data-toggle="tab" href="#users" role="tab"
+                  aria-controls="users" aria-selected="true">Usuarios</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="request-tab" data-toggle="tab" href="#request" role="tab"
+                  aria-controls="request" aria-selected="false">Solicitudes</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <!-- pestaña de users -->
+              <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
+                <div class="pt-2">
+                  <div class="container">
+                    <div class="row row-cols-1 row-cols-md-3">
+                      <div class="col mb-2" *ngFor="let user of users; let i = index">
+                        <div class="card bg-light mx-2 rounded" *ngIf="user.type == 'Editorial' else client">
+                          <div class="card-body">
+                            <div class="product-info">
+                              <div class="media">
+                                <div class="media-body pt-2">
+                                  <div class="pb-2"><span class="product-name"><strong>{{user.name}}</strong></span></div>
+                                  <div><span class="badge badge-info">Tipo de usuario</span></div>
+                                  <div class="pb-2"><span class="font-smaller">{{user.type}}</span></div>
+                                  <div><span class="badge badge-info">Correo electronico</span></div>
+                                  <div class="pb-2"><span class="font-smaller">{{user.email}}</span></div>
+                                  <div><span class="badge badge-info">Contraseña</span></div>
+                                  <div class="pb-2"><span class="font-smaller">{{user.password}}</span></div>
+                                  <div><span class="badge badge-info">Ubicacion</span></div>
+                                  <div class="pb-2"><span class="font-smaller">{{user.location}}</span></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="btn-group pt-2" role="group" aria-label="Basic example">
+                              <button class="btn btn-primary" (click)="edit(i)" data-toggle="tooltip" title="Editar">
+                                <i class="bi bi-person-lines-fill"></i>
+                              </button>
+                              <button class="btn btn-danger" (click)="delete(i)" data-toggle="tooltip" title="Eliminar">
+                                <i class="bi bi-person-dash-fill"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <ng-template #client>
+                          <div class="card bg-light product mx-2 rounded">
+                            <div class="card-body justify-content-center align-items-center">
+                              <div class="product-info">
+                                <div class="media">
+                                  <div class="media-body pt-2">
+                                    <div class="pb-2"><span class="product-name"><strong>{{user.name}}</strong></span></div>
+                                    <div><span class="badge badge-info">Tipo de usuario</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.type}}</span></div>
+                                    <div><span class="badge badge-info">Apellido</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.lastname}}</span></div>
+                                    <div><span class="badge badge-info">Correo electronico</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.email}}</span></div>
+                                    <div><span class="badge badge-info">Contraseña</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.password}}</span></div>
+                                    <div><span class="badge badge-info">Telefono</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.phone}}</span></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="btn-group pt-2" role="group" aria-label="Basic example">
+                                <button class="btn btn-primary" (click)="edit(i)" data-toggle="tooltip"
+                                  title="Editar">
+                                  <i class="bi bi-person-lines-fill"></i>
+                                </button>
+                                <button class="btn btn-danger" (click)="delete(i)" data-toggle="tooltip"
+                                  title="Eliminar">
+                                  <i class="bi bi-person-dash-fill"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- pestaña de request -->
+              <div class="tab-pane fade" id="request" role="tabpanel" aria-labelledby="request-tab">
+                <div class="pt-2">
+                  <div class="container">
+                    <div class="row row-cols-1 row-cols-md-3">
+                      <div class="col mb-2" *ngFor="let user of requests; let i = index">
+                        <div class="card bg-light product mx-2 rounded">
+                          <div class="card-body justify-content-center align-items-center">
+                            <div class="product-info">
+                              <div class="product-info">
+                                <div class="media">
+                                  <div class="media-body pt-2">
+                                    <div class="pb-2"><span class="product-name"><strong>{{user.name}}</strong></span></div>
+                                    <div><span class="badge badge-info">Tipo de usuario</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.type}}</span></div>
+                                    <div><span class="badge badge-info">Correo electronico</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.email}}</span></div>
+                                    <div><span class="badge badge-info">Contraseña</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.password}}</span></div>
+                                    <div><span class="badge badge-info">Ubicacion</span></div>
+                                    <div class="pb-2"><span class="font-smaller">{{user.location}}</span></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="btn-group pt-2" role="group" aria-label="Basic example">
+                              <button class="btn btn-primary" (click)="accept(i)" data-toggle="tooltip" title="Aceptar">
+                                <i class="bi bi-person-check-fill"></i>
+                              </button>
+                              <button class="btn btn-danger" (click)="deny(i)" data-toggle="tooltip" title="Rechazar">
+                                <i class="bi bi-person-x-fill"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <app-footer></app-footer>
+</div>

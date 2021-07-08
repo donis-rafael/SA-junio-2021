@@ -1,0 +1,57 @@
+<div>
+    <body>
+        <app-barra-navegacion></app-barra-navegacion>
+        <br />
+        <br />
+        <main >
+            <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+                <div   class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
+                    <div  *ngFor="let item of books; let i = index" class="col">
+                        <div class="card h-100 shadow-sm"> <img  [src]="item.image" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" id="name">
+                                    {{item.name}}
+                                </h5>
+                                <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">precio</span> <span class="float-end price-hp"> Q.{{item.price}}</span> </div>
+                                <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">Genero</span> <span class="float-end price-hp"> {{item.categories}}</span> </div>
+                                <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">Stock</span> <span class="float-end price-hp"> {{item.stock}}</span> </div>
+                                <h5 class="card-title">{{item.description}}</h5>
+                                <div class="text-center my-4"> <a class="btn btn-warning" (click)="modificarLibro(item)">MODIFICAR</a> </div>
+                                <div class="text-center my-4"> 
+                                    <a class="btn btn-danger"  (click)="deleteBook(item)"
+                                     data-toggle="modal"  data-target="#ModalDeleteBook">
+                                        ELIMINAR
+                                    </a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal ModalDeleteBook -->
+            <div class="modal fade" id="ModalDeleteBook" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <h5>Eliminar libro</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <label style="color: rgb(15, 15, 15);">Esta Seguro que desea eliminar el libro?</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="confirmDelBook()" >Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- <app-footer></app-footer> -->
+    </body>
+</div>

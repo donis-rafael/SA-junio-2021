@@ -1,0 +1,80 @@
+<div>
+  <app-barra-navegacion></app-barra-navegacion>
+  <main class="page blog-post-list pt-4">
+    <section class="clean-block clean-blog-list dark">
+      <div class="container">
+        <div class="block-heading">
+          <h2 class="text-info">Bitacora</h2>
+          <p class="pb-2">Lugar en donde puedes observar el historial de los usuarios editoriales.</p>
+          <div>
+            <button class="btn btn-outline-success btn-sm" (click)="getLog()">
+              Ver todo
+            </button>
+          </div>
+          <div class="pt-2">
+            <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="limpiarTodo()">
+              Limpiar Bitacora
+            </button>
+          </div>
+        </div>
+        <div class="block-content">
+          <div class="row">
+            <div class="col">
+              <h6>Buscar por usuario</h6>
+              <div class="input-group mb-3 pr-3">
+                <input class="form-control form-control-sm" type="search" placeholder="Buscar" [(ngModel)]="buscarEmail"/>
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-outline-success btn-sm" (click)="buscar()">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <h6>Limpiar por usuario</h6>
+              <div class="input-group mb-3 pr-3">
+                <input class="form-control form-control-sm" type="search" placeholder="Limpiar" [(ngModel)]="borrarEmail"/>
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="limpiarUser()">
+                    <i class="bi bi-journal-x"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-body">
+
+            <div class="d-flex pt-3 border-bottom" *ngFor="let log of logs;">
+              <p class="pb-2 mb-0 font-small">
+                <strong class="d-block">{{log.username}} - {{log.email}}</strong>
+                <span class="d-block text-muted pb-2">{{ log.fecha }}</span>
+                {{log.mensaje}}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            <span class="badge badge-warning">¿Esta seguro de eliminar la bitacora?</span>
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="limpiar()" data-dismiss="modal">Si</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

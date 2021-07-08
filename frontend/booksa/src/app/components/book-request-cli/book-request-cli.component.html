@@ -1,0 +1,79 @@
+<div>
+    <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+    <br>
+    <br>
+    <br>
+    <main class="page catalog-page pt-4">
+        <section class="clean-block clean-catalog dark">
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                      <div class="col-12 col-md-9">
+                        <div class="card">
+                            <div class="card-header text-center"><strong>Solicitud de libro no existente</strong></div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="media">
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- SE MUESTRA LA IMAGEN -->
+                                                <div class="col">
+                                                    <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                                        <img [src]="newBook.image" />
+                                                    </ng-container>
+                                                    <ng-template #elseTemplate>
+        
+                                                        <img class="w-50 p-3" src="../../../assets/img/avatars/b1358c2e97643376da222621124d6171.jpg" alt="...">
+                                                    </ng-template>
+                                                </div>
+
+                                              <!-- SE MUESTRA LOS DATOS A RELLENAR -->
+                                                <div class="col">
+                                                    <div class="media-body pt-4">
+                                                        <div><span class="badge badge-info">Nombre del Libro</span></div>
+                                                        <input type="text" id="newbook-name-book"
+                                                            class="form-control quantity-input"
+                                                            [(ngModel)]="newBook.name" min="1">
+                                                        <div><span class="badge badge-info">Nombre del Autor</span></div>
+                                                        <input type="text" id="newbook-author"
+                                                            class="form-control quantity-input"
+                                                            [(ngModel)]="newBook.author" min="1">
+                                                        <div><span class="badge badge-info">Fecha de Publicacion</span></div>
+                                                        <input type="text" id="newbook-published"
+                                                            class="form-control quantity-input"
+                                                            [(ngModel)]="newBook.published" min="1">
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <button class="btn btn-danger form-btn" type="reset"
+                                                                    [routerLink]="['/store']" name="createBook-btnCancelar">CANCELAR
+                                                                </button>
+                                                            </div>
+                                                            <div class="col">
+                                                                <button class="btn btn-primary form-btn" type="submit"
+                                                                    (click)="newRequest()" name="btn-crear">SOLICITAR
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- LINEA DIVISORA -->
+                                                <div class="w-100"></div>
+                                                <!-- BOTON DEBAJO DE LA IMAGEN PARA SUBIR LA IMAGEN -->
+                                                <div class="col">
+                                                    <input type="file" (change)="fileChangeEvent($event)"
+                                                    class="fileInputProfile">
+                                                </div>
+                                                <!-- <div class="col">col</div> -->
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+        </section>
+    </main>
+    <app-footer></app-footer>
+</div>

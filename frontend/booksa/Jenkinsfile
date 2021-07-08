@@ -1,0 +1,79 @@
+pipeline {
+    agent any
+    tools { nodejs "node" }
+    parameters{
+      string(name: 'name_container', defaultValue: 'practica-qa', description: 'nombre del docker')
+      string(name: 'name_imagen', defaultValue: 'practica-qa', description: 'nombre de la imagen')
+      string(name: 'tag_imagen', defaultValue: 'latest', description: 'etiqueta de la imagen')
+      string(name: 'puerto_imagen', defaultValue: '80', description: 'puerto a publicar')
+    }
+    environment {
+      CHROME_BIN = "/usr/bin/chromium-browser"
+      name_final = "${name_container}${tag_imagen}${puerto_imagen}"
+    }
+    stages {
+      stage('install') {
+        steps {
+          script {
+            sh '''
+                cd frontend/booksa
+                npm install
+            '''
+          }
+        }
+      }
+      stage('test') {
+        steps {
+            script {
+              sh '''
+                  cd frontend/booksa
+                  npm run test:ci
+              '''
+            }
+        }
+      }
+      stage('build') {
+        steps {
+          script {
+            sh '''
+                docker build frontend/booksa -t ${name_imagen}:${tag_imagen}
+            '''
+          }
+        }
+      }
+      stage('stop/rm docker') {
+        when {
+          expression {
+            DOCKER_EXIST = sh(returnStdout: true, script: 'echo "$(docker ps -q --filter name=${name_final})"').trim()
+            return DOCKER_EXIST != ''
+          }
+        }
+        steps {
+            script {
+              sh '''
+                  docker stop ${name_final}
+                  docker rm ${name_final}
+              '''
+            }
+        }
+      }
+      stage('run'){
+        steps {
+          script {
+            sh '''
+                docker run -dp ${puerto_imagen}:80 --name ${name_final} ${name_imagen}:${tag_imagen}
+            '''
+          }
+        }
+      }
+      /*stage('docker compose') {
+         steps {
+          script {
+            sh '''
+                frontend/booksa/docker-compose up
+            '''
+          }
+        }
+      }*/
+    }
+}

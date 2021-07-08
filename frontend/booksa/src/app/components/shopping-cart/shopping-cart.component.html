@@ -1,0 +1,139 @@
+<div>
+  <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+  <main class="page shopping-cart-page pt-4">
+    <section class="clean-block clean-cart dark">
+      <div class="container">
+        <div class="block-heading">
+          <h2 class="text-info">Carro de compra</h2>
+          <p>Facilita la compra de un producto o servicio. Acepta el pago y organiza la distribución de esa información.
+          </p>
+        </div>
+        <div class="text-center alert alert-{{notify.tipo}} alert-dismissible fade show" role="alert" *ngIf="notify.activar">
+          <strong>{{notify.mensaje}}</strong>
+          <button type="button" class="close" data-dismiss="alert" data-dismiss="modal" aria-label="Close" (click)="desactivarNotify()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="content">
+          <div class="row g-0">
+            <div class="col-md-12 col-lg-8">
+              <div class="items">
+                <div class="card border-0 product" *ngFor="let book of books; let i = index">
+                  <div class="card-body">
+                    <button type="button" class="close" (click)="deleteBook(i)">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="media">
+                          <img class="mr-3 img-fluid d-block image" src="{{book.image}}" alt="...">
+                          <div class="media-body pt-2">
+                            <div class="pb-2"><span class="product-name font-smaller">{{book.name}}</span></div>
+                            <div><span class="badge badge-info">Autor</span></div>
+                            <div class="pb-2"><span class="font-smaller">{{book.author}}</span></div>
+                            <div><span class="badge badge-info">Genero</span></div>
+                            <!-- <div class="pb-2"><span class="font-smaller">{{book.genres}}</span></div> -->
+                            <div class="pb-1" *ngFor="let gen of book.genres"><span class="font-smaller">{{gen}}</span></div>
+                            <div><span class="badge badge-info">Precio</span></div>
+                            <div><span><h5>Q{{book.price}}</h5></span></div>
+                            <label class="form-label d-md-block font-smaller" for="quantity"><span class="badge badge-info">Cantidad</span></label>
+                            <input type="number" id="quantity" class="form-control quantity-input" [(ngModel)]="book.quantity" min="1">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+              <div class="summary">
+                <h3>Resumen</h3>
+                <h4><span class="text">Total</span><span class="price">${{getTotal()}}</span></h4>
+                <button class="btn btn-primary btn-lg d-block w-100" data-toggle="modal" data-target="#exampleModal"
+                  type="button">
+                  <i class="bi bi-wallet"></i>
+                  Pagar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title">
+            <h2 class="">Factura</h2>
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body clean-block payment-form dark">
+          <div class="container">
+            <form>
+              <div class="products">
+                <h3 class="title">Libros</h3>
+                <div class="item" *ngFor="let book of books; let i = index">
+                  <span class="price">${{book.price * book.quantity}}</span>
+                  <p class="item-name">{{book.name}}</p>
+                  <p class="item-description">{{book.description}}</p>
+                </div>
+                <div class="total"><span>Total</span><span class="price">${{getTotal()}}</span></div>
+              </div>
+              <div class="card-details">
+                <div class="mb-3"><label class="form-label" for="card_holder">Direccion</label><input
+                  class="form-control" type="text" id="card_holder" placeholder="Direccion" name="card_holder" [(ngModel)]="tarjetaCredito.titular">
+                </div>
+              </div>
+              <!-- <div class="card-details">
+                <h3 class="title">Tarjeta de credito</h3>
+                <div class="row">
+                  <div class="col-sm-7">
+                    <div class="mb-3"><label class="form-label" for="card_holder">Titular</label><input
+                        class="form-control" type="text" id="card_holder" placeholder="Titular" name="card_holder" [(ngModel)]="tarjetaCredito.titular">
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="mb-3"><label class="form-label">Fecha exp.</label>
+                      <div class="input-group expiration-date">
+                        <input class="form-control" type="text" placeholder="MM" name="expiration_month" [(ngModel)]="tarjetaCredito.fechaExp.mm">
+                        <input class="form-control" type="text" placeholder="YY" name="expiration_year" [(ngModel)]="tarjetaCredito.fechaExp.yy">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="mb-3">
+                      <label class="form-label" for="card_number">Numero</label>
+                      <input class="form-control" type="text" id="card_number" placeholder="Numero" name="card_number" [(ngModel)]="tarjetaCredito.numero">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="mb-3">
+                      <label class="form-label" for="cvc">CVC</label>
+                      <input class="form-control" type="text" id="cvc" placeholder="CVC" name="cvc" [(ngModel)]="tarjetaCredito.cvc">
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="enviarOrden()">
+            <i class="bi bi-cart-check"></i>
+            Proceder
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

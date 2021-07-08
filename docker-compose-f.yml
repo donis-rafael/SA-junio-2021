@@ -1,0 +1,112 @@
+version: "3.3"
+services: 
+#  mongo:
+#    image: mongo
+#    container_name: mongodb
+#    ports:
+#      - 27017:27017
+#    volumes:
+#      - /home/jhonatanlopez0/mongo:/data/db
+#    restart: unless-stopped
+    
+  # Books:
+  #   container_name: books_container
+  #   image: books_img
+  #   build: 
+  #     context: ./backend/books
+  #     dockerfile: dockerfile
+  #   restart: always
+  #   env_file: 
+  #     - ./.env
+  #   ports:
+  #     - 3002:3002
+  #   #depends_on:
+  #   #  - mongo
+
+  # Requests:
+  #   container_name: requests_container
+  #   image: requests_img
+  #   build: 
+  #     context: ./backend/requests
+  #     dockerfile: dockerfile
+  #   restart: always
+  #   env_file: 
+  #     - ./.env
+  #   ports:
+  #     - 3003:3003
+  #   #depends_on:
+  #   #  - mongo
+    
+  Booksa:
+    container_name: booksa_container
+    image: booksa_img
+    build: 
+     context: ./frontend/booksa
+     dockerfile: Dockerfile
+    restart: always
+    env_file: 
+      - ./.env
+    ports:
+     - 80:80
+    # depends_on:
+    #  - mongo
+
+  # Servidor:
+  #   container_name: servidor_container
+  #   image: servidor_img
+  #   build: 
+  #     context: ./backend/Servidor
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   env_file: 
+  #     - ./.env
+  #   ports:
+  #     - 3000:3000
+  #   #depends_on:
+  #   #  - mongo
+
+  # Impuestos:
+  #   container_name: impuestos_container
+  #   image: impuestos_img
+  #   build: 
+  #     context: ./backend/impuestos
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   env_file: 
+  #     - ./.env
+  #   ports:
+  #     - 3005:3005
+  #   #depends_on:
+  #   #  - mongo
+
+  # Bitacora:
+  #   container_name: bitacora_container
+  #   image: bitacora_img
+  #   build: 
+  #       context: ./backend/bitacora
+  #       dockerfile: Dockerfile
+  #   restart: always
+  #   env_file: 
+  #       - ./.env
+  #   ports:
+  #       - 3004:3004
+  #   #depends_on:
+  #   #    - mongo
+
+  # ESB:
+  #   container_name: esb_container
+  #   image: esb_img
+  #   build: 
+  #       context: ./backend/ESB
+  #       dockerfile: Dockerfile
+  #   restart: always
+  #   env_file: 
+  #     - ./.env
+  #   ports:
+  #       - 4091:4091
+  #   depends_on:
+  #       - Impuestos
+  #       - Servidor
+  #       - Books
+  #       - Requests
+  #       - Bitacora

@@ -1,0 +1,54 @@
+<div>
+    <app-barra-navegacion class="pb-5"></app-barra-navegacion>
+    <br>
+
+    <main class="page catalog-page pt-4">
+        <section class="clean-block clean-catalog dark">
+            <div class="container">
+                <div class="text-center alert alert-{{notificacion.tipo}} alert-dismissible fade show" role="alert"
+                    *ngIf="notificacion.activar">
+                    <strong>{{notificacion.mensaje}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" data-dismiss="modal" aria-label="Close"
+                        (click)="desactivarNotificacion()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="products">
+                                <div class="row pt-2 row-cols-1 row-cols-md-2">
+                                    <div class="col pb-3" *ngFor="let book of books; let i = index">
+                                        <div class="card">
+                                            <div class="card-header text-center"><strong>{{book.name}}</strong></div>
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="media">
+                                                        <img class="w-50 p-3" src="{{book.image}}" alt="...">
+                                                        <div class="media-body pt-2">
+                                                            <div><span class="badge badge-info">Nombre Libro</span></div>
+                                                            <div><span>{{book.name}}</span></div>
+                                                            <div><span class="badge badge-info">Nombre Autor</span></div>
+                                                            <div><span>{{book.author}}</span></div>
+                                                            <div><span class="badge badge-info">Generos</span></div>
+                                                            <div><span>{{book.genres}}</span></div>
+                                                            <div><span class="badge badge-info">Editorial</span></div>
+                                                            <!-- <div><span>{{book.editorial}}</span></div> -->
+                                                            <div><span class="badge badge-info">precio</span></div>
+                                                            <div><span>{{book.price}}</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <app-footer></app-footer>
+</div>
