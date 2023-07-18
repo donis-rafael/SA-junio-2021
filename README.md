@@ -2,9 +2,9 @@
 
 # Rafael Morales
 
-Desarrollo de backend en *Node.js*
+Desarrollo de **backend** en *Node.js*
 
-Proyecto desarrollado con estructura de microservicios, teniendo un Servidor central y varios microservicios para gestión única, también un ESB para realizar pruebas con otros servicios (portales) exponiendo endpoints para consumo público, conexión a Base de Datos *MongoDB*.
+Proyecto desarrollado para el curso **Software Avanzado**, con estructura de microservicios, teniendo un Servidor central y varios microservicios para gestión única, también un ESB para realizar pruebas con otros servicios (portales) exponiendo endpoints para consumo público, conexión a Base de Datos *MongoDB*.
 
 Para más información detallada, se encuentra el enunciado del proyecto en la carpeta [*enunciadoProyecto*](https://github.com/donis-rafael/SA-junio-2021/tree/develop/enunciadoProyecto).
 
